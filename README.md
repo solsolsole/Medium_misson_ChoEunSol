@@ -1,1 +1,6 @@
-# Medium_misson_ChoEunSol
+# 미디엄 블로그 플랫폼
+1. [x] 회원기능
+2. [x] 글CRUD
+3. [x] 조회수
+4. [x] 추천
+5. [x] 댓글

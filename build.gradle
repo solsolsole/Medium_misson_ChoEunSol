@@ -22,10 +22,21 @@ repositories {
 }
 
 dependencies {
+    // h2 데이터베이스
+    runtimeOnly 'com.h2database:h2'
+    // jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // 스프링 웹
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // 롬복
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    // 타임리프
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    // 스프링 데브툴
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    // 테스트
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
