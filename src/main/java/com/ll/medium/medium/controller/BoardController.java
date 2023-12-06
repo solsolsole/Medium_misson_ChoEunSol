@@ -18,14 +18,14 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/list")
+    @GetMapping("/list") // 게시글 목록
     public String list (Model model) {
         List<Board> boardList = boardService.getList();
         model.addAttribute("boardList", boardList);
         return "board_list";
     }
 
-    @GetMapping(value = "/detail/{id}")
+    @GetMapping(value = "/detail/{id}") // 게시글 상세
     public String detail(Model model, @PathVariable("id") Integer id) {
         Board board = boardService.getBoard(id);
         model.addAttribute("board", board);

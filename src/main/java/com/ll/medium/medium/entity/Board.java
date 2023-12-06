@@ -26,6 +26,6 @@ public class Board {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private List<Comment> answerList;
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList;
 }

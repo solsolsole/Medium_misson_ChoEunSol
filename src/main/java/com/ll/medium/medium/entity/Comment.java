@@ -2,14 +2,14 @@ package com.ll.medium.medium.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Data
 @Entity
 public class Comment {
 
@@ -23,5 +23,5 @@ public class Comment {
     private LocalDateTime createDate;
 
     @ManyToOne
-    private Board question;
+    private Board board;
 }
