@@ -6,6 +6,7 @@ import com.ll.medium.medium.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,5 +27,16 @@ public class BoardService {
         } else {
             throw new DataNotFoundException("게시글이 존재 하지 않습니다.");
         }
+    }
+
+    public Integer create(String subject, String content) {
+        Board b = new Board();
+        b.setSubject(subject);
+        b.setContent(content);
+        b.setCreateDate(LocalDateTime.now());
+
+        // 생성된 게시글 id 반환
+        Board savedBoard = boardRepository.save(b);
+        return savedBoard.getId();
     }
 }

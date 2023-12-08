@@ -34,6 +34,10 @@ dependencies {
     // 타임리프
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    // 벨리데이션
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // 레이아웃
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     // 스프링 데브툴
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     // 테스트
