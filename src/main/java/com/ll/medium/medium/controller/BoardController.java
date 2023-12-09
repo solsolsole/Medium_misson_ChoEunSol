@@ -6,15 +6,11 @@ import com.ll.medium.medium.form.CommentForm;
 import com.ll.medium.medium.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/board")
 @RequiredArgsConstructor
@@ -24,9 +20,9 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list") // 게시글 목록
-    public String list (Model model) {
-        List<Board> boardList = boardService.getList();
-        model.addAttribute("boardList", boardList);
+    public String list (Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+        Page<Board> paging = boardService.getList(page);
+        model.addAttribute("paging", paging);
         return "board/board_list";
     }
 

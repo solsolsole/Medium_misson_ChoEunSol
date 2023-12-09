@@ -1,6 +1,6 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <h5 class="my-3 border-bottom pb-2">글 등록</h5>
     <form th:action="@{/board/create}" th:object="${boardForm}" method="post">
         <div class="alert alert-danger" role="alert" id="errorAlert" style="display: none;">
             <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />

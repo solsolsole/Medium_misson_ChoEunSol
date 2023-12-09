@@ -4,9 +4,14 @@ import com.ll.medium.DataNotFoundException;
 import com.ll.medium.medium.entity.Board;
 import com.ll.medium.medium.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +43,12 @@ public class BoardService {
         // 생성된 게시글 id 반환
         Board savedBoard = boardRepository.save(b);
         return savedBoard.getId();
+    }
+
+    public Page<Board> getList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page,10, Sort.by(sorts));
+        return boardRepository.findAll(pageable);
     }
 }

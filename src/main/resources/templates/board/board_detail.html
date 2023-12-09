@@ -29,9 +29,20 @@
     <!-- 답변 반복 끝  -->
     <!-- 답변 작성 -->
     <form th:action="@{|/comment/create/${board.id}|}" th:object="${commentForm}" method="post" class="my-3">
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+        <div class="alert alert-danger" role="alert" id="errorAlert" style="display: none;">
             <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
         </div>
+        <script>
+            window.onload = function() {
+                var errorDiv = document.getElementById('errorAlert');
+                errorDiv.style.display = 'block';
+                // 1초 후에 경고창을 자동으로 사라지도록 함
+                setTimeout(function() {
+                    errorDiv.style.display = 'none';
+                }, 1500);
+            };
+        </script>
+
         <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
         <input type="submit" value="댓글등록" class="btn btn-info my-2">
     </form>
