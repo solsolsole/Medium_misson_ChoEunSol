@@ -10,9 +10,13 @@
         </thead>
         <tbody>
         <tr th:each="board, loop : ${paging}">
-            <td th:text="${loop.count}"></td>
+            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td>
                 <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
+                <span class="text-danger small ms-2"
+                      th:if="${#lists.size(board.commentList) > 0}"
+                      th:text="${#lists.size(board.commentList)}">
+                    </span>
             </td>
             <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
@@ -28,7 +32,7 @@
                 </a>
             </li>
             <li th:each="page: ${#numbers.sequence(1, paging.totalPages-1)}"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:if="${page >= paging.number-2 and page <= paging.number+2}"
                 th:classappend="${page == paging.number} ? 'active'"
                 class="page-item">
                 <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>

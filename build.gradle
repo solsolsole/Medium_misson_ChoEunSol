@@ -42,6 +42,9 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     // 테스트
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // 스프링 시큐리티
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
 }
 
 tasks.named('test') {
