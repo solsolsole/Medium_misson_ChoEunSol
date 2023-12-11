@@ -1,5 +1,6 @@
 package com.ll.medium.medium.entity;
 
+import com.ll.medium.medium.global.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,7 @@ public class Comment {
 
     @ManyToOne
     private Board board;
+
+    @ManyToOne
+    private SiteUser author;
 }

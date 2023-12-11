@@ -2,6 +2,7 @@ package com.ll.medium.medium.service;
 
 import com.ll.medium.DataNotFoundException;
 import com.ll.medium.medium.entity.Board;
+import com.ll.medium.medium.global.user.SiteUser;
 import com.ll.medium.medium.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,11 +35,12 @@ public class BoardService {
         }
     }
 
-    public Integer create(String subject, String content) {
+    public Integer create(String subject, String content, SiteUser user) {
         Board b = new Board();
         b.setSubject(subject);
         b.setContent(content);
         b.setCreateDate(LocalDateTime.now());
+        b.setAuthor(user);
 
         // 생성된 게시글 id 반환
         Board savedBoard = boardRepository.save(b);

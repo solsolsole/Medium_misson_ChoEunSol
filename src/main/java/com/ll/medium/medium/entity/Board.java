@@ -1,5 +1,6 @@
 package com.ll.medium.medium.entity;
 
+import com.ll.medium.medium.global.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +29,7 @@ public class Board {
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
+
+    @ManyToOne
+    private SiteUser author;
 }

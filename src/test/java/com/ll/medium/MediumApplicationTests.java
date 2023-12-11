@@ -18,7 +18,7 @@ class MediumApplicationTests {
         for (int i = 0; i < 25; i++) {
             String subject = String.format("test%03d",i);
             String content = "test";
-            boardService.create(subject, content);
+            boardService.create(subject, content, null);
         }
     }
 
