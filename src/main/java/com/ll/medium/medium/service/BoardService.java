@@ -53,4 +53,15 @@ public class BoardService {
         Pageable pageable = PageRequest.of(page,10, Sort.by(sorts));
         return boardRepository.findAll(pageable);
     }
+
+    public void modify (Board board, String subject, String content) {
+        board.setSubject(subject);
+        board.setContent(content);
+        board.setModifyDate(LocalDateTime.now());
+        boardRepository.save(board);
+    }
+
+    public void delete (Board board) {
+        boardRepository.delete(board);
+    }
 }

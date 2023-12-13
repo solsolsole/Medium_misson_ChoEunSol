@@ -9,11 +9,13 @@ import com.ll.medium.medium.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -61,4 +63,42 @@ public class BoardController {
         return "redirect:/board/detail/" + createdId;
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{id}")
+    public String boardModify(BoardForm boardForm, @PathVariable("id") Integer id, Principal principal) {
+        Board board = boardService.getBoard(id);
+        if(!board.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        boardForm.setSubject(board.getSubject());
+        boardForm.setContent(board.getContent());
+        return "board/board_form";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{id}")
+    public String boardModify(@Valid BoardForm boardForm, BindingResult bindingResult,
+                                 Principal principal, @PathVariable("id") Integer id) {
+        if (bindingResult.hasErrors()) {
+            return "board_form";
+        }
+        Board board = this.boardService.getBoard(id);
+        if (!board.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        this.boardService.modify(board, boardForm.getSubject(), boardForm.getContent());
+        return String.format("redirect:/board/detail/%s", id);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String boardDelete (@Valid BoardForm boardForm, BindingResult bindingResult,
+                               Principal principal, @PathVariable("id") Integer id) {
+        Board board = boardService.getBoard(id);
+        if (!board.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        boardService.delete(board);
+        return "redirect:/";
+    }
 }

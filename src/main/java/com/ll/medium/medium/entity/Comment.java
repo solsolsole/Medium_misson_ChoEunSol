@@ -28,4 +28,6 @@ public class Comment {
 
     @ManyToOne
     private SiteUser author;
+
+    private LocalDateTime modifyDate;
 }

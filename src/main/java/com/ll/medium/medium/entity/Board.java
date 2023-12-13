@@ -32,4 +32,6 @@ public class Board {
 
     @ManyToOne
     private SiteUser author;
+
+    private LocalDateTime modifyDate;
 }
