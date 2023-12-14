@@ -101,4 +101,13 @@ public class BoardController {
         boardService.delete(board);
         return "redirect:/";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String boardVote(Principal principal, @PathVariable("id") Integer id){
+        Board board = boardService.getBoard(id);
+        SiteUser siteUser = userService.getUser(principal.getName());
+        boardService.vote(board, siteUser);
+        return String.format("redirect:/board/detail/%s", id);
+    }
 }

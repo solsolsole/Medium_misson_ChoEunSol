@@ -64,4 +64,9 @@ public class BoardService {
     public void delete (Board board) {
         boardRepository.delete(board);
     }
+
+    public void vote(Board board, SiteUser siteUser) {
+        board.getVoter().add(siteUser);
+        boardRepository.save(board);
+    }
 }

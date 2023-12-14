@@ -81,4 +81,13 @@ public class CommentController {
         commentService.delete(comment);
         return String.format("redirect:/board/detail/%s", comment.getBoard().getId());
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String commentVote (Principal principal, @PathVariable("id") Integer id) {
+        Comment comment = commentService.getComment(id);
+        SiteUser siteUser = userService.getUser(principal.getName());
+        commentService.vote(comment, siteUser);
+        return String.format("redirect:/board/detail/%s", comment.getBoard().getId());
+    }
 }
